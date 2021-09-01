@@ -1,5 +1,5 @@
-const ROWS = 15;
-const COLS = 3;
+const ROWS = 10;
+const COLS = 10;
 
 const matrix = new Array(ROWS);
 for (let i = 0; i < matrix.length; i++) {
@@ -30,26 +30,29 @@ function goSnakeByMatrix(matrix) {
     }
     
     iMatrix.shift();
-    
-    if (iMatrix[0] && iMatrix[0].length !== 0) {
-      for (let i = 0; i <= iMatrix.length - 1; i++) {
-        inumbers.push(iMatrix[i].pop());
-      }
-      
-      if (iMatrix[0].length === 0) {
-        return;
-      }
-      for (let i = iMatrix[0].length - 1, y = iMatrix.length - 1; i >= 0; i--) {
-        inumbers.push(iMatrix[y].pop());
-      }
-      
-      iMatrix.pop();
-      
-      for (let i = iMatrix.length - 1; i >= 0; i--) {
-        inumbers.push(iMatrix[i].shift());
-      }
-      goSnakeByMatrix(iMatrix);
+
+    if (!iMatrix.length) {
+      return;
     }
+
+    for (let i = 0; i <= iMatrix.length - 1; i++) {
+      inumbers.push(iMatrix[i].pop());
+    }
+    
+    if (iMatrix[0].length === 0) {
+      return;
+    }
+    
+    for (let i = iMatrix[0].length - 1, y = iMatrix.length - 1; i >= 0; i--) {
+      inumbers.push(iMatrix[y].pop());
+    }
+    
+    iMatrix.pop();
+    
+    for (let i = iMatrix.length - 1; i >= 0; i--) {
+      inumbers.push(iMatrix[i].shift());
+    }
+    goSnakeByMatrix(iMatrix);
   }
 }
 
